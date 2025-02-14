@@ -18,7 +18,7 @@ app.use(express.json({ extented: true })); //for req.body
 
 // app.get('/',(req,res)=>res.json({msg:'welcome to the contact keeper api'}));
 //Define Routes
-app.use('/', res.send('sdsd'));
+
 app.use('/api/users', require('./routes/users'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/contacts', require('./routes/contacts'));
