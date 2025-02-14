@@ -1,4 +1,5 @@
 import React from 'react';
+import { TextField, Box } from '@mui/material';
 import {
   useContacts,
   filterContacts,
@@ -6,7 +7,6 @@ import {
 } from '../../context/contact/ContactState';
 
 const ContactFilter = () => {
-  // we just need the conact dispatch without state.
   const contactDispatch = useContacts()[1];
 
   const onChange = (e) => {
@@ -18,9 +18,14 @@ const ContactFilter = () => {
   };
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
-      <input type='text' placeholder='Filter Contacts...' onChange={onChange} />
-    </form>
+    <Box sx={{ mt: 2 }}>
+      <TextField
+        fullWidth
+        label='Filter Tasks'
+        variant='outlined'
+        onChange={onChange}
+      />
+    </Box>
   );
 };
 

@@ -14,7 +14,7 @@ const Contacts = () => {
   }, [contactDispatch]);
 
   if (contacts !== null && contacts.length === 0) {
-    return <h4>Please add a contact</h4>;
+    return <h4>Please add a task</h4>;
   }
 
   return (

@@ -2,12 +2,19 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import AlertContext from '../../context/alert/alertContext';
 import { useAuth, clearErrors, register } from '../../context/auth/AuthState';
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Box,
+  Alert
+} from '@mui/material';
 
 const Register = (props) => {
   const alertContext = useContext(AlertContext);
   const [authState, authDispatch] = useAuth();
   const { error, isAuthenticated } = authState;
-
   const { setAlert } = alertContext;
 
   useEffect(() => {
@@ -35,75 +42,84 @@ const Register = (props) => {
     } else if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
     } else {
-      register(authDispatch, {
-        name,
-        email,
-        password
-      });
+      register(authDispatch, { name, email, password });
     }
   };
 
   if (isAuthenticated) return <Navigate to='/' />;
 
   return (
-    <div className='form-container'>
-      <h1>
-        Account <span className='text-primary'>Register</span>
-      </h1>
-      <form onSubmit={onSubmit}>
-        <div className='form-group'>
-          <label htmlFor='name'>Name</label>
-          <input
-            id='name'
-            type='text'
+    <Container maxWidth='sm'>
+      <Box
+        sx={{
+          mt: 5,
+          p: 3,
+          boxShadow: 3,
+          borderRadius: 2,
+          bgcolor: 'background.paper'
+        }}
+      >
+        <Typography variant='h4' component='h1' gutterBottom>
+          Account <span style={{ color: '#1976d2' }}>Register</span>
+        </Typography>
+        <form onSubmit={onSubmit}>
+          <TextField
+            fullWidth
+            label='Name'
+            variant='outlined'
             name='name'
             value={name}
             onChange={onChange}
+            margin='normal'
             required
           />
-        </div>
-        <div className='form-group'>
-          <label htmlFor='email'>Email Address</label>
-          <input
-            id='email'
+          <TextField
+            fullWidth
+            label='Email Address'
+            variant='outlined'
             type='email'
             name='email'
             value={email}
             onChange={onChange}
+            margin='normal'
             required
           />
-        </div>
-        <div className='form-group'>
-          <label htmlFor='password'>Password</label>
-          <input
-            id='password'
+          <TextField
+            fullWidth
+            label='Password'
+            variant='outlined'
             type='password'
             name='password'
             value={password}
             onChange={onChange}
+            margin='normal'
             required
-            minLength='6'
+            inputProps={{ minLength: 6 }}
           />
-        </div>
-        <div className='form-group'>
-          <label htmlFor='password2'>Confirm Password</label>
-          <input
-            id='password2'
+          <TextField
+            fullWidth
+            label='Confirm Password'
+            variant='outlined'
             type='password'
             name='password2'
             value={password2}
             onChange={onChange}
+            margin='normal'
             required
-            minLength='6'
+            inputProps={{ minLength: 6 }}
           />
-        </div>
-        <input
-          type='submit'
-          value='Register'
-          className='btn btn-primary btn-block'
-        />
-      </form>
-    </div>
+          <Button
+            type='submit'
+            variant='contained'
+            color='primary'
+            fullWidth
+            sx={{ mt: 2 }}
+          >
+            Register
+          </Button>
+        </form>
+      </Box>
+    </Container>
   );
 };
 
