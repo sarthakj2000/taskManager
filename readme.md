@@ -1,3 +1,4 @@
+step 0: create a .env file and write your mongoURI and jwtSecret
 step 1: type npm install to install backend dependencies on terminal
 step 2: type npm start
 step 3: type cd client on another terminal
