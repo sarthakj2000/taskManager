@@ -2,10 +2,18 @@ const express = require('express');
 const connectDB = require('./config/db');
 const path = require('path');
 const app = express();
+const cors = require('cors');
 //connect database
 connectDB();
 const PORT = process.env.PORT || 5000;
 //Init Middleware
+app.use(
+  cors({
+    origin: 'https://task-manager-gilt-eight.vercel.app',
+    methods: 'GET,POST,PUT,DELETE',
+    credentials: true
+  })
+);
 app.use(express.json({ extented: true })); //for req.body
 
 // app.get('/',(req,res)=>res.json({msg:'welcome to the contact keeper api'}));
